@@ -136,6 +136,8 @@ app.get('/profile/delete/(:id)',async(req,res) =>{
 //commit lagi dengan nama membuat request post
 app.get('/',(req,res)=> res.send("hello dunia"))
 //config body-parser
-
+//buat koneksi ke file todoRoutes.js
+var todoRoute=require('./routes/todoRoutes');
+app.use('/todo',todoRoute);
 
 app.listen(port, ()=> console.log('example app listening on port ${port}!'))
