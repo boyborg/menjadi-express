@@ -89,6 +89,20 @@ app.put('/profile/update/(:id)',async(req,res) =>{
     res.status(statusCode).json(response);
 })
 
+//delete data method get
+//url :http://localhost:3000/profile/delete/id
+app.get('/profile/delete/(:id)',async(req,res) =>{
+    let statusCode=200
+    let message="delete person"
+    let person = await personModel.findByIdAndDelete(req.params.id).exec();
+    const response={
+        statusCode:200,
+        error:message,
+        message:message,
+        content:person
+    }
+    res.status(statusCode).json(response);
+})
 
 
 //commit lagi dengan nama membuat request post
