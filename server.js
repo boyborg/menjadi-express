@@ -17,6 +17,25 @@ const personModel=mongooseServer.model("person",{
 
 //membuat request post
 //nama request first name,lastname
+app.post('/profile/create', async(req,res) => {
+    // do something here
+    console.log(req.body)
+    const insert={
+        firstName:req.body.firstName,
+        lastName:req.body.lastName
+
+    }
+    var person = new personModel(insert);
+    var result= await person.save();
+    const response={
+        statusCode:200,
+        error:"",
+        message:"create person",
+        content:result
+    }
+    res.json(response)
+})
+
 app.post('/hello', function(req,res){
     const response={
         statusCode:200,
