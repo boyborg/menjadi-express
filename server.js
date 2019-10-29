@@ -74,6 +74,23 @@ app.get('/profile/detail/(:id)', async(req,res)=>{
     res.status(statusCode).json(response);
 })
 
+//update data profile menggunakan metode put
+//url :http://localhost:3000/profile/update/idmongo
+app.put('/profile/update/(:id)',async(req,res) =>{
+    let statusCode=200
+    let message="update person"
+    let person = await personModel.findById(req.params.id,req.body,{new:true});
+    const response={
+        statusCode:200,
+        error:message,
+        message:message,
+        content:person
+    }
+    res.status(statusCode).json(response);
+})
+
+
+
 //commit lagi dengan nama membuat request post
 app.get('/',(req,res)=> res.send("hello dunia"))
 //config body-parser
