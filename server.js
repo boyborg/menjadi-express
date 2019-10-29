@@ -49,7 +49,7 @@ app.post('/hello', function(req,res){
 
 //menampilkan semua data
 //url http://localhost:3000/profile/list
-app.get('/profilelist',async(req,res)=>{
+app.get('/profile/list',async(req,res)=>{
     //something here
     var person = await personModel.find().exec();
     const response={
@@ -59,6 +59,19 @@ app.get('/profilelist',async(req,res)=>{
         content:person
     }
     res.json(response);
+})
+
+app.get('/profile/detail/(:id)', async(req,res)=>{
+    let statusCode=200
+    let message=""
+    let person= await personModel.findById(req.params.id).exec();
+    const response={
+        statusCode:200,
+        error:"",
+        message:message,
+        content:person
+    }
+    res.status(statusCode).json(response);
 })
 
 //commit lagi dengan nama membuat request post
