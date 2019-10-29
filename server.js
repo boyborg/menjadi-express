@@ -92,9 +92,18 @@ app.put('/profile/update/(:id)',async(req,res) =>{
 //delete data method get
 //url :http://localhost:3000/profile/delete/id
 app.get('/profile/delete/(:id)',async(req,res) =>{
+    //check data objek id valid; jika valid lakukan eksekusi delete
+    const checkId=mongooseServer.Types.ObjectId.isValid(req.params.id);
     let statusCode=200
     let message="delete person"
-    let person = await personModel.findByIdAndDelete(req.params.id).exec();
+    if(checkId){
+        var person=await personModel.findByIdAndDelete(req.params.id).exec();
+    }else{
+        statusCode=404;
+        message="object id invalid";
+        var person=null;
+    }
+    
     const response={
         statusCode:200,
         error:message,
