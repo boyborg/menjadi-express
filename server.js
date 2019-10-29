@@ -40,9 +40,23 @@ app.post('/hello', function(req,res){
     const response={
         statusCode:200,
         error:"",
-        message: "hello jsonf",
+        message: "hello json",
         conntent:req.body
 
+    }
+    res.json(response);
+})
+
+//menampilkan semua data
+//url http://localhost:3000/profile/list
+app.get('/profilelist',async(req,res)=>{
+    //something here
+    var person = await personModel.find().exec();
+    const response={
+        statusCode:200,
+        error:"",
+        message:"list person",
+        content:person
     }
     res.json(response);
 })
