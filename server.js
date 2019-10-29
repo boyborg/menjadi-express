@@ -7,6 +7,14 @@ app.use(bodyParser.urlencoded({extended:true})); //menangkap tipe request dalam 
 app.use(bodyParser.json()); //mengkap url dalam bentuk json
 //commit lagi dengan nama config body-parser
 
+const mongooseServer =require('./mongomodel/mongoConfig')
+const personModel=mongooseServer.model("person",{
+    firstName:String,
+    lastName:String
+});
+
+//commit -m "Memanggil mongoconfig dan membuat model person model sebagai penamping collection person"
+
 //membuat request post
 //nama request first name,lastname
 app.post('/hello', function(req,res){
