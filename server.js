@@ -20,21 +20,38 @@ const personModel=mongooseServer.model("person",{
 app.post('/profile/create', async(req,res) => {
     // do something here
     console.log(req.body)
-    const insert={
-        firstName:req.body.firstName,
-        lastName:req.body.lastName
-
+    //validasi pada create
+    if(!req.body.firstName){
+        res.status(400).json({
+            statusCode:400,
+            error:"firstName parameter is required",
+            message:"firstName parameter is required"
+        });
     }
-    var person = new personModel(insert);
-    var result= await person.save();
-    const response={
-        statusCode:200,
-        error:"",
-        message:"create person",
-        content:result
+    else if(!req.body.lastName){
+        res.status(400).json({
+            statusCode:400,
+            error:"lasttName parameter is required",
+            message:"lasttName parameter is required"
+        });
     }
-    res.json(response)
-})
+    else{
+        const insert={
+            firstName:req.body.firstName,
+            lastName:req.body.lastName
+    
+        }
+        var person = new personModel(insert);
+        var result= await person.save();
+        const response={
+            statusCode:200,
+            error:"",
+            message:"create person",
+            content:result
+        }
+        res.json(response)
+    }
+});          
 
 app.post('/hello', function(req,res){
     const response={
@@ -45,7 +62,8 @@ app.post('/hello', function(req,res){
 
     }
     res.json(response);
-})
+}
+);
 
 //menampilkan semua data
 //url http://localhost:3000/profile/list
